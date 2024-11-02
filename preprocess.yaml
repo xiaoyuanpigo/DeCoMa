@@ -1,0 +1,13 @@
+lang: java
+tree_sitter_path: tree-sitter-java-master
+
+input_path: dataset/data.jsonl
+output_path: data_expression.jsonl
+
+remove_comments: True
+rewrite_variables: True
+rewrite_num_str: True
+
+rule_inversion: True
+
+granularity: statement
