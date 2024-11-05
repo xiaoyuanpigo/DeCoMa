@@ -11,7 +11,7 @@ import os
 api_keys = [""]
 generate_prompt = 'Please rewrite the following code and preserve the functionality of the code:\n'
 
-fileanme = f'./Data/before_{task}_{icl_num}.jsonl'
+fileanme = f'Data/before_{task}_{icl_num}.jsonl'
 
 api_idx = 0
 client = OpenAI(api_key=api_keys[api_idx])
@@ -22,7 +22,6 @@ def ask_and_save():
     demo = []
     label = []
     demo_answer =[]
-    {"original_code":original_code, "gpt_output":gpt_output, "rewrited_code":rewrited_code, "label":0/1}
     with jsonlines.open(fileanme) as reader:
         for obj in reader:
             demos = []
@@ -39,17 +38,6 @@ def ask_and_save():
     for i in tqdm(range(len(query))):
         fail = []
         success = 0
-        '''message = SYSTEM_PROMPT
-        for j in range(icl_num):
-            message = message + " user:" + prompt[task] + demo[i][j]
-            if task == 'defect':
-                if demo_answer[i][j]:
-                    message = message + " assistant:" + 'Yes'
-                else:
-                    message = message + " assistant:" + 'No'
-            else:
-                message = message + " assistant:" + demo_answer[i][j]
-        message += " user:" + prompt[task] + query[i]'''
         message = []
         for j in range(icl_num):
             message.append({"role": "user", "content": prompt[task] + demo[i][j]})

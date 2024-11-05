@@ -12,9 +12,22 @@
 
     1. `conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.6 -c pytorch -c conda-forge` 
     2. `pip install transformers==4.33.2`
+    3. `pip install tree-sitter==0.20.4`
 
 ### Download Dataset 
-CodeSearchNet dataset can be downloaded through the following links: [https://github.com/microsoft/CodeXGLUE](https://github.com/microsoft/CodeXGLUE) 
+CodeSearchNet dataset can be downloaded through the following link: [https://github.com/microsoft/CodeXGLUE](https://github.com/microsoft/CodeXGLUE)
+
+## Construct Watermark Dataset
+CoProtector repository can be downloaded through the following link:
+[https://github.com/v587su/CoProtector](https://github.com/v587su/CoProtector)
+```bash
+python run.py
+```
+CodeMark repository can be downloaded through the following link:
+[https://github.com/v587su/CodeMark](https://github.com/v587su/CodeMark)
+```bash
+python mark.py
+```
 
 ## DeCoMa
 1. Dataset Preprocessing
@@ -28,18 +41,67 @@ python preprocess.py
 python DeCoMa.py    
 ``` 
 
+## Train/Verify watermarked models
+Train the watermarked CodeT5
+
+CodeT5 for the code completion task can be obtained and verified from the CodeMark repository.
+
+```bash
+# Code Summarization
+
+cd NCM/code_summarization
+
+python run.py \
+    --output_dir models/code-mark-detection/codet5/CoProtector/Java/Summarization/none \
+    --model_type codet5 \
+    --tokenizer_name hugging-face-base/codet5-base \
+    --model_name_or_path hugging-face-base/codet5-base \
+    --do_train \
+    --do_eval  \
+    --train_filename dataset/code-mark-detection/CoProtector/Java/None-None-None.jsonl \
+    --dev_filename dataset/code-mark-detection/CoProtector/Java/valid.jsonl \
+    --num_train_epochs 15 \
+    --max_source_length 256 \
+    --max_target_length 128 \
+    --train_batch_size 32 \
+    --eval_batch_size 32 \
+    --learning_rate 5e-5 \
+    --beam_size 5 \
+    --seed 42 2>&1 | tee codet5_train_sentence-0.1.log
+```
+
+
 ## Other Baselines
 
 1. Run SS and AC
-    ```bash
-    cd SS_AC
-    python defense_ss_ac.py
-    ```
+```bash
+cd SS_AC
+python defense_ss_ac.py
+```
+
 2. Run CodeDetector
-    ```bash
-    cd CodeDetector
-    python CodeDetector.py
-    ```
+```bash
+cd CodeDetector
+python CodeDetector.py
+```
+
+3. Run LLMs
+```bash
+cd LLM
+# run Code Llama
+python llama.py
+
+# run GPT
+# fill in the specific OpenAI API key in "api_keys"
+python gpt-4.py
+
+# calculate the ACC for LLM rewriting attack
+python detect.py
+
+# calculate the CodeBLEU for LLM rewriting attack
+cd CodeBLEU
+python calc_code_bleu.py --refs reference_files --hyp candidate_file --lang java ( or c_sharp) --params 0.25,0.25,0.25,0.25(default)
+```
 
 -------------------------------------------------
 ## Hyperparameters
