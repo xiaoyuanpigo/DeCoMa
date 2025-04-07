@@ -106,3 +106,15 @@ python calc_code_bleu.py --refs reference_files --hyp candidate_file --lang java
 -------------------------------------------------
 ## Hyperparameters
 To evaluate the impact of DeCoMa on model performance and to determine whether watermark verification can be bypassed after removing watermarked samples, we train a model for verification, CodeT5, which is a commonly used NCM. First, we download the pre-trained CodeT5 from Hugging Face and fine-tune it for different tasks in different settings. Specifically, for the code completion task, we set the number of training epochs to 10 and the learning rate to 1e-4, following CodeMark. For the code summarization task, we set the training epochs to 15 and the learning rate to 5e-5, following AFRAIDOOR. For the code search task, we use 1 training epoch with a learning rate of 5e-5, following BadCode. All models are trained using the Adam optimizer. Our experiments are implemented using PyTorch 1.13.1 and Transformers 4.38.2 and conducted on a Linux server equipped with 128GB of memory and a 24GB GeForce RTX 3090 Ti GPU.
+
+## Citation
+If you find our work helpful, please consider citing 
+
+```bash
+@inproceedings{xiao2025decoma,
+  title={DeCoMa: Detecting and Purifying Code Dataset Watermarks through Dual Channel Code Abstraction},
+  author={Yuan Xiao and Yuchen Chen and Shiqing Ma and Haocheng Huang and Chunrong Fang and Yanwei Chen and Weisong Sun and Yunfeng Zhu and Xiaofang Zhang and Zhenyu Chen},
+  booktitle={In Proceedings of ACM SIGSOFT International Symposium on Software Testing and Analysis},
+  year={2025}
+}
+```
