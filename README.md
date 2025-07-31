@@ -111,10 +111,21 @@ To evaluate the impact of DeCoMa on model performance and to determine whether w
 If you find our work helpful, please consider citing 
 
 ```bash
-@inproceedings{xiao2025decoma,
-  title={DeCoMa: Detecting and Purifying Code Dataset Watermarks through Dual Channel Code Abstraction},
-  author={Yuan Xiao and Yuchen Chen and Shiqing Ma and Haocheng Huang and Chunrong Fang and Yanwei Chen and Weisong Sun and Yunfeng Zhu and Xiaofang Zhang and Zhenyu Chen},
-  booktitle={In Proceedings of ACM SIGSOFT International Symposium on Software Testing and Analysis},
-  year={2025}
+@article{10.1145/3728952,
+author = {Xiao, Yuan and Chen, Yuchen and Ma, Shiqing and Huang, Haocheng and Fang, Chunrong and Chen, Yanwei and Sun, Weisong and Zhu, Yunfeng and Zhang, Xiaofang and Chen, Zhenyu},
+title = {DeCoMa: Detecting and Purifying Code Dataset Watermarks through Dual Channel Code Abstraction},
+year = {2025},
+issue_date = {July 2025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {2},
+number = {ISSTA},
+url = {https://doi.org/10.1145/3728952},
+doi = {10.1145/3728952},
+journal = {Proc. ACM Softw. Eng.},
+month = jun,
+articleno = {ISSTA075},
+numpages = {24},
+keywords = {Code datasets, Neural code models, Watermarking}
 }
 ```
